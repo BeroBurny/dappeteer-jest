@@ -3,14 +3,15 @@ import {bootstrap, RECOMMENDED_METAMASK_VERSION} from '@chainsafe/dappeteer';
 
 jest.setTimeout(100 * 1000);
 
-test('two plus two is four', async () => {
-  const { metaMask, browser, metaMaskPage } = await bootstrap({
+test('dappeteer browser starts', async () => {
+  const { browser } = await bootstrap({
     metaMaskVersion: RECOMMENDED_METAMASK_VERSION,
-    automation: "playwright",
+    automation: "puppeteer",
     headless: true,
-    browser: "chrome",
     metaMaskFlask: false,
   });
+  expect(browser).toBeDefined();
 
-  expect(true).toBeTruthy();
+  await browser.close();
+  expect(false).toBeFalsy();
 });
